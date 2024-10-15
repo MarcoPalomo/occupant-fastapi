@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Occupancy</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Room Occupancy</h1>
+        <div>
+            <h2>Rooms</h2>
+            <ul>
+                <li v-for="room in rooms" :key="room.id">
+                    {{ room.name }} ({{ room.occupants.length }} occupants)
+                    <ul>
+                        <li v-for="person in room.occupants" :key="person.id">
+                            {{ person.name }}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2>Add Room</h2>
+            <input v-model="newRoom.name" placeholder="Room Name">
+            <button @click="addRoom">Add Room</button>
+        </div>
+        <div>
+            <h2>Add Person to Room</h2>
+            <select v-model="selectedRoomId">
+                <option v-for="room in rooms" :value="room.id" :key="room.id">
+                    {{ room.name }}
+                </option>
+            </select>
+            <input v-model="newPerson.name" placeholder="Person Name">
+            <button @click="addPerson">Add Person</button>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
